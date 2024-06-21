@@ -48,7 +48,7 @@ package models {
         String name
         String description
         float weight
-        int unitAmount
+        int packageAmount
         bool restricted
     }
 
@@ -92,7 +92,7 @@ package models {
 package repos{
 
     class LogHistory{
-        List<Log> history
+        List<String> history
     }
 
     class Stock{
@@ -120,7 +120,7 @@ package utils{
         void lostProduct()
     }
 
-    class ExecuteSale{
+    class SaleUtils{
 
 
         void closeSale()
