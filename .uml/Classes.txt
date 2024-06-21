@@ -17,6 +17,7 @@ package models {
         String log
 
         void closeSale()
+        void cancelSale()
     }
 
     abstract Actor {
@@ -30,16 +31,16 @@ package models {
         Gender gender
     }
 
+    class LegalEntity{
+        String cnpj
+    }
+
     class Client{
         
     }
 
     class Employee{
         Role role
-    }
-
-    class Cart{
-        'TODO
     }
 
     class Product{
@@ -51,24 +52,63 @@ package models {
         bool restricted
     }
 
+    class Cart{
+        List<Item> itemList
+
+        void addProduct()
+        void rmProduct()
+        int totalPrice()
+    }
+
+    class Item{
+        Product
+        int amount() 
+    }
+
+    package structs{
+        enum Gender{
+            female
+            male
+            non-binary
+            other
+        }
+
+        enum Role{
+            clerk
+            manager
+        }
+
+        enum Payment{
+            card
+            cash
+            pix
+        }
+
+    }
+
 }
 
 
 package repos{
 
+    class LogHistory{
+        List<Log> history
+    }
+
     class Stock{
         List<ProductRepo> stockedProducts
+
+        void addProduct()
+        void rmProduct()
+        ProductRepo search()
     }
 
     class ClientRepo{
         List<Client> clients
-        'TODO
-    }
-
-    class ProductRepo{
-        List<Product> products
-
-        int amount() 
+        
+        void addClient()
+        void rmClient()
+        Client search()
     }
 
 }
@@ -79,19 +119,14 @@ package utils{
         void sell()
         void lostProduct()
     }
-}
 
-package structs{
-    enum Gender{
-        female
-        male
-        non-binary
-        other
-    }
+    class ExecuteSale{
 
-    enum Role{
-        clerk
-        manager
+
+        void closeSale()
+        void executePayment()
+        void updateStock()
+        void saveLog()
     }
 }
 
@@ -99,5 +134,13 @@ package structs{
 Actor <|-- PrivateIndividual
 PrivateIndividual <|-- Client
 PrivateIndividual <|-- Employee
+Actor <|-- LegalEntity
+
+Item - Product
+Cart - Item
+Sale - Cart
+
+Client - Sale
+Employee - Sale
 
 @enduml
