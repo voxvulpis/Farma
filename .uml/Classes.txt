@@ -1,1 +1,103 @@
-@startumlallowmixingtitle Farmapackage models {class Sale{Client clientTrolley trolleyvoid closeSale()'TODO}class client{String nameString cpf'TODO}class Trolley{'TODO}class Product{'TODO}}'End of Models Packagepackage repos{class Stock{List<ProductRepo> stockedProducts}class ClientRepo{List<Client> clients'TODO}class ProductRepo{List<Product> productsint amount() }}package utils{class StockUtils{void restock()void sell()void lostProduct()}}@enduml
+@startuml
+allowmixing
+
+
+title Farma
+
+
+package models {
+
+    class Sale{
+        int id
+        Employee employee
+        Client client
+        Date timeStamp
+        Cart cart
+        Payment payment
+        String log
+
+        void closeSale()
+    }
+
+    abstract Actor {
+        int id
+        Date registrationTime
+    }
+
+    abstract PrivateIndividual{
+        String cpf
+        Date birthDate
+        Gender gender
+    }
+
+    class Client{
+        
+    }
+
+    class Employee{
+        Role role
+    }
+
+    class Cart{
+        'TODO
+    }
+
+    class Product{
+        int id
+        String name
+        String description
+        float weight
+        int unitAmount
+        bool restricted
+    }
+
+}
+
+
+package repos{
+
+    class Stock{
+        List<ProductRepo> stockedProducts
+    }
+
+    class ClientRepo{
+        List<Client> clients
+        'TODO
+    }
+
+    class ProductRepo{
+        List<Product> products
+
+        int amount() 
+    }
+
+}
+
+package utils{
+    class StockUtils{
+        void restock()
+        void sell()
+        void lostProduct()
+    }
+}
+
+package structs{
+    enum Gender{
+        female
+        male
+        non-binary
+        other
+    }
+
+    enum Role{
+        clerk
+        manager
+    }
+}
+
+
+Actor <|-- PrivateIndividual
+PrivateIndividual <|-- Client
+PrivateIndividual <|-- Employee
+
+@enduml
