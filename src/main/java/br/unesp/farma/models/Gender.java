@@ -1,4 +1,4 @@
-package br.unesp.farma.structs;
+package br.unesp.farma.models;
 
 public enum Gender {
     female,
