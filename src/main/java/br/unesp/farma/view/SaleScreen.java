@@ -1,4 +1,4 @@
-package br.unesp.farma;
+package br.unesp.farma.view;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -6,16 +6,14 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import java.util.Objects;
-
 
 public class SaleScreen extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
-        FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("sale-screen.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(SaleScreen.class.getResource("sale-screen.fxml"));
         Parent root = fxmlLoader.load();
         primaryStage.setTitle("Sales Screen");
-        primaryStage.setScene(new Scene(root, 500, 350));
+        primaryStage.setScene(new Scene(root, 675, 490));
         primaryStage.show();
     }
 

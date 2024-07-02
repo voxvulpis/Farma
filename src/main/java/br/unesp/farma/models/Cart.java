@@ -8,4 +8,12 @@ public class Cart {
     public Cart(List<Item> itemList){
         this.itemList = itemList;
     }
+
+    public List<Item> getItemList(){
+        return itemList;
+    }
+
+    public String toString() {
+        return "Cart with " + itemList.size() + " items";
+    }
 }

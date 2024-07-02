@@ -4,14 +4,16 @@ public class Product {
     Integer id;
     String name;
     String description;
+    Float price;
     Float weight;
     Integer packageUnits;
     Boolean restrictSale;
 
-    public Product(Integer id, String name, String description, Float weight, Integer packageUnits, Boolean restrictSale) {
+    public Product(int id, String name, String description, float price, float weight, int packageUnits, boolean restrictSale) {
         this.id = id;
         this.name = name;
         this.description = description;
+        this.price = price;
         this.weight = weight;
         this.packageUnits = packageUnits;
         this.restrictSale = restrictSale;
@@ -27,6 +29,14 @@ public class Product {
 
     public String getName() {
         return name;
+    }
+
+    public float getPrice() {
+        return price;
+    }
+
+    public void setPrice(float price) {
+        this.price = price;
     }
 
     public void setName(String name) {
@@ -63,5 +73,10 @@ public class Product {
 
     public void setRestrictSale(Boolean restrictSale) {
         this.restrictSale = restrictSale;
+    }
+
+    @Override
+    public String toString() {
+        return name;
     }
 }
