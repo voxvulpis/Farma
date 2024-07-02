@@ -24,4 +24,8 @@ public class Item {
     public void setAmount(int amount) {
         this.amount = amount;
     }
+    @Override
+    public String toString() {
+        return amount + " x " + product.toString();
+    }
 }

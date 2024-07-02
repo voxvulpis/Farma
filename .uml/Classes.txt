@@ -48,6 +48,7 @@ package models {
         String name
         String description
         float weight
+        float price
         int packageAmount
         bool restricted
     }

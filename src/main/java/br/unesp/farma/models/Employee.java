@@ -3,7 +3,8 @@ package br.unesp.farma.models;
 public class Employee extends PrivateIndividual{
     Role role;
 
-    public Employee(Role role) {
+    public Employee(String name, Role role) {
+        this.name = name;
         this.role = role;
     }
 
@@ -13,5 +14,10 @@ public class Employee extends PrivateIndividual{
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    @Override
+    public String toString() {
+        return name;
     }
 }
