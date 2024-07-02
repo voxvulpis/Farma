@@ -1,14 +1,14 @@
 package br.unesp.farma.models;
 
 public class Product {
-    int id;
+    Integer id;
     String name;
     String description;
-    float weight;
-    int packageUnits;
-    boolean restrictSale;
+    Float weight;
+    Integer packageUnits;
+    Boolean restrictSale;
 
-    public Product(int id, String name, String description, float weight, int packageUnits, boolean restrictSale) {
+    public Product(Integer id, String name, String description, Float weight, Integer packageUnits, Boolean restrictSale) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -17,11 +17,11 @@ public class Product {
         this.restrictSale = restrictSale;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -41,27 +41,27 @@ public class Product {
         this.description = description;
     }
 
-    public float getWeight() {
+    public Float getWeight() {
         return weight;
     }
 
-    public void setWeight(float weight) {
+    public void setWeight(Float weight) {
         this.weight = weight;
     }
 
-    public int getPackageUnits() {
+    public Integer getPackageUnits() {
         return packageUnits;
     }
 
-    public void setPackageUnits(int packageUnits) {
+    public void setPackageUnits(Integer packageUnits) {
         this.packageUnits = packageUnits;
     }
 
-    public boolean isRestrictSale() {
+    public Boolean getRestrictSale() {
         return restrictSale;
     }
 
-    public void setRestrictSale(boolean restrictSale) {
+    public void setRestrictSale(Boolean restrictSale) {
         this.restrictSale = restrictSale;
     }
 }

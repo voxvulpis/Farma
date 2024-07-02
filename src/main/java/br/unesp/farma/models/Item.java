@@ -2,9 +2,9 @@ package br.unesp.farma.models;
 
 public class Item {
     Product product;
-    int amount;
+    Integer amount;
 
-    public Item(Product product, int amount) {
+    public Item(Product product, Integer amount) {
         this.product = product;
         this.amount = amount;
     }
@@ -17,11 +17,11 @@ public class Item {
         this.product = product;
     }
 
-    public int getAmount() {
+    public Integer getAmount() {
         return amount;
     }
 
-    public void setAmount(int amount) {
+    public void setAmount(Integer amount) {
         this.amount = amount;
     }
 }

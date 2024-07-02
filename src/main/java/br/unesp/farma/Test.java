@@ -1,16 +1,15 @@
 package br.unesp.farma;
 
-import javafx.application.Application;
-import javafx.stage.Stage;
+import br.unesp.farma.repos.Stock;
+import br.unesp.farma.utils.DemonstrationUtils;
 
-public class Test extends Application {
-
+public class Test {
     public static void main(String[] args) {
-        launch(args);
-    }
+        DemonstrationUtils.startDemo();
 
-    @Override
-    public void start(Stage primaryStage) {
+        Stock stock = DemonstrationUtils.loadStockFromJson();
+
+        System.out.println(stock.toString());
 
     }
 }
