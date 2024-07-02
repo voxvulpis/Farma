@@ -15,7 +15,7 @@ public class SaleScreen extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("sale-screen.fxml"));
         Parent root = fxmlLoader.load();
         primaryStage.setTitle("Sales Screen");
-        primaryStage.setScene(new Scene(root, 500, 350));
+        primaryStage.setScene(new Scene(root, 675, 490));
         primaryStage.show();
     }
 
