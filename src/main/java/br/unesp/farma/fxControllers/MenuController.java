@@ -1,6 +1,9 @@
 package br.unesp.farma.fxControllers;
 
+<<<<<<< HEAD
 import br.unesp.farma.view.SaleScreen;
+=======
+>>>>>>> f124075 (Beta screens for main menu and stock manager)
 import br.unesp.farma.view.Stock;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -30,7 +33,6 @@ public class MenuController {
         } catch (Exception ex) {
             throw new RuntimeException(ex);
         }
-
     }
 
     public void openStock(ActionEvent e){
