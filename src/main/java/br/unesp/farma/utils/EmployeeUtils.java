@@ -5,8 +5,8 @@ import br.unesp.farma.models.Role;
 
 public class EmployeeUtils {
 
-    public static void createEmployee(Role role){
-        Employee employee = new Employee(role);
+    public static void createEmployee(String name, Role role){
+        Employee employee = new Employee(name, role);
     }
 
     public static void editEmployee(){
