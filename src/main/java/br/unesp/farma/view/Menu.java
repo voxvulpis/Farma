@@ -1,6 +1,5 @@
 package br.unesp.farma.view;
 
-import br.unesp.farma.Main;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;

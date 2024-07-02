@@ -9,7 +9,7 @@ public class Product {
     Integer packageUnits;
     Boolean restrictSale;
 
-    public Product(int id, String name, String description, float price, float weight, int packageUnits, boolean restrictSale) {
+    public Product(int id, String name, String description, Float price, Float weight, Integer packageUnits, Boolean restrictSale) {
         this.id = id;
         this.name = name;
         this.description = description;

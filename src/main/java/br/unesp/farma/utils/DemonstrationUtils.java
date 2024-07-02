@@ -20,8 +20,8 @@ public class DemonstrationUtils {
 
     public static void startDemo(){
         Stock stock = new Stock();
-        Product product = new Product(1, "Test Name 1", "Test Desc 1", 1.1f, 11, 5,false);
-        Product product2 = new Product(2, "Test Name 2", "Test Desc 2", 2.2f, 22, 4,true);
+        Product product = new Product(1, "Test Name 1", "Test Desc 1", 10.1f, 1.1f, 11, false);
+        Product product2 = new Product(2, "Test Name 2", "Test Desc 2", 10.1f, 2.2f, 22, true);
 
         stock.addToStock(product);
         stock.addToStock(product2);
