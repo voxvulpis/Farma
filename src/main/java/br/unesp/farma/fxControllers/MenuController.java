@@ -1,19 +1,12 @@
 package br.unesp.farma.fxControllers;
 
-<<<<<<< HEAD
 import br.unesp.farma.view.SaleScreen;
-=======
->>>>>>> f124075 (Beta screens for main menu and stock manager)
 import br.unesp.farma.view.Stock;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
-import java.util.Objects;
 
 public class MenuController {
 
