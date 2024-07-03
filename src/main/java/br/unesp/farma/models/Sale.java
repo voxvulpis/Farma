@@ -60,6 +60,8 @@ public class Sale {
             print = log + "Sale " + this.id +  " closed on " + new Date();
         }
 
+        DemonstrationUtils.saveToJson(stock);
+
         System.out.println(print + stock.toString());
     }
 
