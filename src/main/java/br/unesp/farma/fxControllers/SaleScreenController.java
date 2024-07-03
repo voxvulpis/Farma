@@ -2,12 +2,17 @@ package br.unesp.farma.fxControllers;
 
 import br.unesp.farma.models.*;
 
+import br.unesp.farma.repos.Stock;
+import br.unesp.farma.utils.DemonstrationUtils;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.util.converter.IntegerStringConverter;
 
 import java.util.Arrays;
 import java.util.Date;
@@ -15,11 +20,7 @@ import java.util.List;
 import java.util.Random;
 
 public class SaleScreenController {
-    Product product1 = new Product(1, "Product A", "Description A", 15.0f,1.0f, 10, false);
-    Product product2 = new Product(2, "Product B", "Description B", 10.0f, 2.0f, 20, true);
-    Item item1 = new Item(product1, 2);
-    Item item2 = new Item(product2, 3);
-    List<Item> list = Arrays.asList(item1, item2);
+    Stock stock = DemonstrationUtils.loadStockFromJson();
 
     @FXML
     private TextField idTextField;
@@ -54,7 +55,7 @@ public class SaleScreenController {
     private TextField valueTextField;
     @FXML
     private ComboBox<Payment> paymentComboBox;
-    private final Cart cart = new Cart(list);
+    private final Cart cart = new Cart(stock.getStockList());
     private final Date timeStamp = new Date();
     private String log;
 
@@ -69,6 +70,11 @@ public class SaleScreenController {
         List<Employee> employees = Arrays.asList(new Employee("Claudio", Role.clerk), new Employee("Roberto", Role.manager));
         List<Client> clients = Arrays.asList(new Client("Acme Corp"), new Client("Globex Inc"));
 
+        for(Item item : cart.getItemList()){
+            if(item.getAmount() > 0)
+                item.setAmount(0);
+        }
+
         
         idTextField.setText(id);
         timeTextField.setText(timeStamp.toString());
@@ -76,7 +82,6 @@ public class SaleScreenController {
         employeeComboBox.getItems().addAll(employees);
         clientComboBox.getItems().addAll(clients);
         paymentComboBox.getItems().addAll(Arrays.asList(Payment.values()));
-
         idColumn.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().getProduct().getId()));
         nameColumn.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().getProduct().getName()));
         priceColumn.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().getProduct().getPrice()));
@@ -89,7 +94,13 @@ public class SaleScreenController {
 
 
         cartTableView.getItems().addAll(cart.getItemList());
-        updateTotalValue();
+        quantityColumn.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
+        quantityColumn.setOnEditCommit(event -> {
+            Item item = event.getRowValue();
+            item.setAmount(event.getNewValue());
+            cartTableView.refresh();
+            updateTotalValue();
+        });
     }
 
     private void updateTotalValue() {
