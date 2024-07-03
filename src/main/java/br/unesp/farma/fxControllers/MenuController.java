@@ -1,7 +1,7 @@
 package br.unesp.farma.fxControllers;
 
 import br.unesp.farma.view.SaleScreen;
-import br.unesp.farma.view.Stock;
+import br.unesp.farma.view.StockScreen;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -31,7 +31,7 @@ public class MenuController {
     public void openStock(ActionEvent e){
         System.out.println("LOG: Open Stock");
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(Stock.class.getResource("stock-screen.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(StockScreen.class.getResource("stock-screen.fxml"));
             Stage stage = new Stage();
             Scene scene = new Scene(fxmlLoader.load());
             stage.setTitle("Stock Management");

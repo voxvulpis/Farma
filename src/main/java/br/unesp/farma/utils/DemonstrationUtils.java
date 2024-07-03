@@ -13,7 +13,7 @@ import java.lang.reflect.Type;
 
 /*
 *
-* This file is utilised to assist the demonstration of the software and emulate the functions data persistence
+* This file is utilised to assist the demonstration of the software and emulate the utilities of data persistence
 *
 */
 
@@ -48,7 +48,8 @@ public class DemonstrationUtils {
             try {
                 stock = gson.fromJson(new FileReader(file), STOCK_TYPE);
             } catch (FileNotFoundException e) {
-                throw new RuntimeException(e);
+                System.out.println("File not found. Returning: new Stock();");
+//                throw new RuntimeException(e);
             }
         }
 
