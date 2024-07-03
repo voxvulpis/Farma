@@ -1,13 +1,20 @@
 package br.unesp.farma.models;
 
+import jakarta.validation.constraints.NotNull;
+
 public class Product {
-    Integer id;
-    String name;
-    String description;
-    Float price;
-    Float weight;
-    Integer packageUnits;
-    Boolean restrictSale;
+    @NotNull
+    private Integer id;
+    @NotNull
+    private String name;
+    private String description;
+    @NotNull
+    private Float price;
+    private Float weight;
+    @NotNull
+    private Integer packageUnits;
+    @NotNull
+    private Boolean restrictSale;
 
     public Product(int id, String name, String description, Float price, Float weight, Integer packageUnits, Boolean restrictSale) {
         this.id = id;

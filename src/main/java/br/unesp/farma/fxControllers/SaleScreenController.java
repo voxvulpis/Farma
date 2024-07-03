@@ -2,17 +2,16 @@ package br.unesp.farma.fxControllers;
 
 import br.unesp.farma.models.*;
 
+import br.unesp.farma.repos.Stock;
+import br.unesp.farma.utils.DemonstrationUtils;
+import javafx.application.Platform;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.fxml.FXML;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.stage.Stage;
+import javafx.stage.Window;
 
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public class SaleScreenController {
 
@@ -49,7 +48,13 @@ public class SaleScreenController {
     private TextField valueTextField;
     @FXML
     private ComboBox<String> paymentComboBox;
+
+    @FXML
+    private Button closeSaleBtn;
+
     private String log;
+    Stock stock;
+    Cart cart;
 
     @FXML
     public void initialize() {
@@ -57,7 +62,7 @@ public class SaleScreenController {
         Random random = new Random();
         int num = random.nextInt(10000);
         String id = Integer.toString(num);
-        float value;
+        cart = new Cart();
 
         // Populate ComboBoxes with sample data
         List<Employee> employees = Arrays.asList(new Employee("Claudio", Role.clerk), new Employee("Roberto", Role.manager));
@@ -68,7 +73,8 @@ public class SaleScreenController {
         Item item1 = new Item(product1, 2);
         Item item2 = new Item(product2, 3);
 
-        Cart cart = new Cart(Arrays.asList(item1, item2));
+        cart.modItem(item1.getProduct(), item1.getAmount());
+        cart.modItem(item2.getProduct(), item2.getAmount());
         
         idTextField.setText(id);
         timeTextField.setText(timeStamp.toString());
@@ -106,6 +112,8 @@ public class SaleScreenController {
         Client client = clientComboBox.getSelectionModel().getSelectedItem();
         String payment = paymentComboBox.getSelectionModel().getSelectedItem();
         String id = idTextField.getText();
+        Iterator<Item> iterator = cart.getItemList().iterator();
+        Item item;
 
         if (employee != null && client != null && payment != null) {
             log = "Sale " + id + " payed with " + payment + " closed on " + new Date() + " by " + employee.getName() + " for client " + client.getName();
@@ -114,6 +122,23 @@ public class SaleScreenController {
         }
 
         System.out.println(log);
+
+        stock = DemonstrationUtils.loadStockFromJson();
+
+        while (iterator.hasNext()){
+            item = iterator.next();
+            try {
+                stock.adjustStock(item);
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+
+        }
+        DemonstrationUtils.saveToJson(stock);
+
+        Stage stage = (Stage) closeSaleBtn.getScene().getWindow();
+        stage.close();
+
         // Implement more logic as needed
     }
 

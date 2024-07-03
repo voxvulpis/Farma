@@ -20,7 +20,7 @@ public class MenuController {
             FXMLLoader fxmlLoader = new FXMLLoader(SaleScreen.class.getResource("sale-screen.fxml"));
             Stage stage = new Stage();
             Scene scene = new Scene(fxmlLoader.load());
-            stage.setTitle("Stock Management");
+            stage.setTitle("Sale");
             stage.setScene(scene);
             stage.show();
         } catch (Exception ex) {
