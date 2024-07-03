@@ -3,7 +3,7 @@ package br.unesp.farma.view;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
-public class Stock extends Application {
+public class StockScreen extends Application {
 
     public static void main(String[] args) {
         launch(args);
