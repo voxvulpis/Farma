@@ -34,7 +34,7 @@ public class Stock {
         while (iterator.hasNext()){
             Item item = iterator.next();
             if(Objects.equals(item.getProduct().getId(), id)){
-                item.setAmount(item.getAmount() + amount);
+                item.setAmount(amount);
                 if(item.getAmount() < 0) item.setAmount(0);
                 stockList.remove(i);
                 stockList.add(i, item);

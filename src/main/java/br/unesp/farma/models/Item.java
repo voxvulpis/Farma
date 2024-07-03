@@ -1,5 +1,7 @@
 package br.unesp.farma.models;
 
+import jakarta.validation.constraints.Positive;
+
 public class Item {
     Product product;
     Integer amount;

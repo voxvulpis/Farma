@@ -2,6 +2,7 @@ module br.unesp.farma {
     requires javafx.controls;
     requires javafx.fxml;
     requires com.google.gson;
+    requires jakarta.validation;
 
     opens br.unesp.farma.view to javafx.fxml;
     exports br.unesp.farma.view;
