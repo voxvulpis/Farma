@@ -19,7 +19,7 @@
       <ComboBox fx:id="clientComboBox" layoutX="129.0" layoutY="61.0" prefHeight="25.0" prefWidth="265.0" />
       <Button layoutX="587.0" layoutY="442.0" mnemonicParsing="false" onAction="#closeSale" text="Finish" />
       <Button layoutX="515.0" layoutY="442.0" mnemonicParsing="false" onAction="#cancelSale" text="Cancel" />
-      <Button layoutX="29.0" layoutY="442.0" mnemonicParsing="false" text="Return" />
+      <Button layoutX="29.0" layoutY="442.0" mnemonicParsing="false" onAction="#handleBackButton" text="Return" />
       <TableView fx:id="cartTableView" layoutX="103.0" layoutY="143.0" prefHeight="182.0" prefWidth="515.0" editable="true">
         <columns>
           <TableColumn fx:id="idColumn" prefWidth="43.0" text="ID" />

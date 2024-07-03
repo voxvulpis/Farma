@@ -54,11 +54,7 @@ public class Sale {
             }
         }
 
-        if (this.employee != null && this.client != null && this.payment != null) {
-            print = log + "Sale " + this.id + " payed with " + this.payment + " closed on " + new Date() + " by " + this.employee.getName() + " for client " + this.client.getName();
-        } else {
-            print = log + "Sale " + this.id +  " closed on " + new Date();
-        }
+        print = log + "Sale " + this.id + " payed with " + this.payment + " closed on " + new Date() + " by " + this.employee.getName() + " for client " + this.client.getName();
 
         DemonstrationUtils.saveToJson(stock);
 

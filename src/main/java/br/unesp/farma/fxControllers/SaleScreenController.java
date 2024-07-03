@@ -4,7 +4,9 @@ import br.unesp.farma.models.*;
 
 import br.unesp.farma.repos.Stock;
 import br.unesp.farma.utils.DemonstrationUtils;
+import javafx.application.Platform;
 import javafx.beans.property.ReadOnlyObjectWrapper;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
@@ -12,6 +14,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.stage.Stage;
 import javafx.util.converter.IntegerStringConverter;
 
 import java.util.Arrays;
@@ -58,6 +61,14 @@ public class SaleScreenController {
     private final Cart cart = new Cart(stock.getStockList());
     private final Date timeStamp = new Date();
     private String log;
+
+    @FXML
+    private void handleBackButton() {
+        // Get a reference to the stage
+        Stage stage = (Stage) cartTableView.getScene().getWindow();
+        // Close the stage
+        stage.close();
+    }
 
     @FXML
     public void initialize() {
@@ -117,10 +128,12 @@ public class SaleScreenController {
         Client client = clientComboBox.getSelectionModel().getSelectedItem();
         Payment payment = paymentComboBox.getSelectionModel().getSelectedItem();
         int id = Integer.parseInt(idTextField.getText());
+        if(employee != null && client != null && payment != null){
+            Sale sale = new Sale(id, employee, client, timeStamp, cart, payment, "Sale log: ");
 
-        Sale sale = new Sale(id, employee, client, timeStamp, cart, payment, "Sale log: ");
-
-        sale.closeSale();
+            sale.closeSale();
+            handleBackButton();
+        }
     }
 
     @FXML
@@ -133,5 +146,6 @@ public class SaleScreenController {
         Sale sale = new Sale(id, employee, client, timeStamp, cart, payment, "Sale log: ");
 
         sale.cancelSale();
+        handleBackButton();
     }
 }
