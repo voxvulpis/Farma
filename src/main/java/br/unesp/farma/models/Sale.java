@@ -3,17 +3,23 @@ package br.unesp.farma.models;
 import br.unesp.farma.utils.DemonstrationUtils;
 import br.unesp.farma.repos.Stock;
 
+import jakarta.validation.constraints.NotNull;
+
 import java.util.Date;
 
 public class Sale {
-    int id;
-    Employee employee;
-    Client client;
-    Date timeStamp;
-    Cart cart;
-    Payment payment;
-    String log;
     Stock stock = DemonstrationUtils.loadStockFromJson();
+    @NotNull
+    private Integer id;
+    @NotNull
+    private Employee employee;
+    private Client client;
+    private Date timeStamp;
+    @NotNull
+    private Cart cart;
+    @NotNull
+    private Payment payment;
+    private String log;
 
     public Sale(int id, Employee employee, Client client, Date timeStamp, Cart cart, Payment payment, String log) {
         this.id = id;
@@ -31,6 +37,46 @@ public class Sale {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public Employee getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
+    }
+
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
+    }
+
+    public Date getTimeStamp() {
+        return timeStamp;
+    }
+
+    public void setTimeStamp(Date timeStamp) {
+        this.timeStamp = timeStamp;
+    }
+
+    public Cart getCart() {
+        return cart;
+    }
+
+    public void setCart(Cart cart) {
+        this.cart = cart;
+    }
+
+    public Payment getPayment() {
+        return payment;
+    }
+
+    public void setPayment(Payment payment) {
+        this.payment = payment;
     }
 
     public String getLog() {

@@ -1,10 +1,13 @@
 package br.unesp.farma.models;
 
+import jakarta.validation.constraints.NotNull;
+
 public class Employee extends PrivateIndividual{
-    Role role;
+    @NotNull
+    private Role role;
 
     public Employee(String name, Role role) {
-        this.name = name;
+        super.setName(name);
         this.role = role;
     }
 
@@ -18,6 +21,6 @@ public class Employee extends PrivateIndividual{
 
     @Override
     public String toString() {
-        return name;
+        return super.getName();
     }
 }

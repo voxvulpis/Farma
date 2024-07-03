@@ -1,14 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Text?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="490.0" prefWidth="675.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.unesp.farma.fxControllers.SaleScreenController">
+<AnchorPane prefHeight="490.0" prefWidth="675.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.unesp.farma.fxControllers.SaleScreenController">
    <children>
       <Text layoutX="37.0" layoutY="79.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Client:" wrappingWidth="66.13671875" />
       <Text layoutX="37.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ID:" wrappingWidth="66.13671875" />
@@ -17,7 +13,7 @@
       <TextField fx:id="idTextField" editable="false" layoutX="129.0" layoutY="24.0" prefHeight="26.0" prefWidth="98.0" />
       <ComboBox fx:id="employeeComboBox" layoutX="152.0" layoutY="99.0" prefHeight="25.0" prefWidth="241.0" />
       <ComboBox fx:id="clientComboBox" layoutX="129.0" layoutY="61.0" prefHeight="25.0" prefWidth="265.0" />
-      <Button layoutX="587.0" layoutY="442.0" mnemonicParsing="false" onAction="#closeSale" text="Finish" />
+      <Button fx:id="closeSaleBtn" layoutX="587.0" layoutY="442.0" mnemonicParsing="false" onAction="#closeSale" text="Finish" />
       <Button layoutX="515.0" layoutY="442.0" mnemonicParsing="false" onAction="#cancelSale" text="Cancel" />
       <Button layoutX="29.0" layoutY="442.0" mnemonicParsing="false" onAction="#handleBackButton" text="Return" />
       <TableView fx:id="cartTableView" layoutX="103.0" layoutY="143.0" prefHeight="182.0" prefWidth="515.0" editable="true">

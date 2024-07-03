@@ -1,12 +1,18 @@
 package br.unesp.farma.models;
 
+import jakarta.validation.constraints.NotNull;
+
 import java.util.Date;
 
 public abstract class PrivateIndividual extends Actor {
-    String name;
-    String cpf;
-    Date birthDate;
-    Gender gender;
+    @NotNull
+    private String name;
+    @NotNull
+    private String cpf;
+    @NotNull
+    private Date birthDate;
+    @NotNull
+    private Gender gender;
 
     public Date getBirthDate() {
         return birthDate;

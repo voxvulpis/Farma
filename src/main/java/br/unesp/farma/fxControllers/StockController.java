@@ -3,6 +3,7 @@ package br.unesp.farma.fxControllers;
 import br.unesp.farma.models.Item;
 import br.unesp.farma.repos.Stock;
 import br.unesp.farma.utils.DemonstrationUtils;
+import jakarta.validation.constraints.NotNull;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
@@ -12,13 +13,19 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.stage.Stage;
+import javafx.stage.Window;
+import org.hibernate.validator.internal.constraintvalidators.bv.NotNullValidator;
 
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
+import java.util.stream.Stream;
 
 public class StockController implements Initializable {
     @FXML
@@ -40,6 +47,7 @@ public class StockController implements Initializable {
 
     Stock stock;
     Item currentItem;
+    Stage stage;
 
 
     @Override
@@ -50,6 +58,8 @@ public class StockController implements Initializable {
 //        amountCol.setCellValueFactory((new PropertyValueFactory<>("amount")));
         amountCol.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getAmount()));
         stockTable.setItems(itemList());
+
+
 
         stockTable.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Item>() {
             @Override
@@ -78,6 +88,8 @@ public class StockController implements Initializable {
             itemNameLabel.setText(ex.getMessage());
         }
 
+        stage = (Stage)((Node) e.getSource()).getScene().getWindow();
+        stage.setOnHiding(event -> DemonstrationUtils.saveToJson(stock));
         stockTable.refresh();
     }
 }

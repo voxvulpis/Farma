@@ -8,19 +8,13 @@ import javafx.application.Platform;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.control.cell.TextFieldTableCell;
-import javafx.stage.Stage;
+import javafx.stage.*;
 import javafx.util.converter.IntegerStringConverter;
+import javafx.scene.control.*;
+import javafx.stage.Stage;
+import javafx.stage.Window;
 
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public class SaleScreenController {
     Stock stock = DemonstrationUtils.loadStockFromJson();
@@ -58,6 +52,8 @@ public class SaleScreenController {
     private TextField valueTextField;
     @FXML
     private ComboBox<Payment> paymentComboBox;
+    @FXML
+    private Button closeSaleBtn;
     private final Cart cart = new Cart(stock.getStockList());
     private final Date timeStamp = new Date();
     private String log;

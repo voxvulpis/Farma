@@ -1,10 +1,13 @@
 package br.unesp.farma.models;
 
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 
 public class Item {
-    Product product;
-    Integer amount;
+    @NotNull
+    private Product product;
+    @NotNull
+    private Integer amount;
 
     public Item(Product product, Integer amount) {
         this.product = product;
