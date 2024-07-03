@@ -29,51 +29,38 @@ public class Sale {
         this.id = id;
     }
 
-    public Employee getEmployee() {
-        return employee;
-    }
-
-    public void setEmployee(Employee employee) {
-        this.employee = employee;
-    }
-
-    public Client getClient() {
-        return client;
-    }
-
-    public void setClient(Client client) {
-        this.client = client;
-    }
-
-    public Date getTimeStamp() {
-        return timeStamp;
-    }
-
-    public void setTimeStamp(Date timeStamp) {
-        this.timeStamp = timeStamp;
-    }
-
-    public Cart getCart() {
-        return cart;
-    }
-
-    public void setCart(Cart cart) {
-        this.cart = cart;
-    }
-
-    public Payment getPayment() {
-        return payment;
-    }
-
-    public void setPayment(Payment payment) {
-        this.payment = payment;
-    }
-
     public String getLog() {
         return log;
     }
 
     public void setLog(String log) {
         this.log = log;
+    }
+
+    public void closeSale() {
+        String print;
+
+        for(Item item : cart.itemList){
+            item.product.setPackageUnits(item.product.getPackageUnits() - item.getAmount());
+        }
+
+        if (this.employee != null && this.client != null && this.payment != null) {
+            print = log + "Sale " + this.id + " payed with " + this.payment + " closed on " + new Date() + " by " + this.employee.getName() + " for client " + this.client.getName();
+        } else {
+            print = log + "Sale " + this.id +  " closed on " + new Date();
+        }
+
+        System.out.println(print);
+    }
+
+    public void cancelSale() {
+
+        if (this.employee != null && this.client != null) {
+            log = log + "Sale " + this.id + " cancelled on " + new Date() + " by " + this.employee.getName() + " for client " + this.client.getName();
+        } else {
+            log = log + "Sale " + this.id +  " closed on " + new Date();
+        }
+
+        System.out.println(log);
     }
 }

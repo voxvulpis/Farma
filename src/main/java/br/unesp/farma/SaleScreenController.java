@@ -8,7 +8,6 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.util.Arrays;
 import java.util.Date;
@@ -16,6 +15,11 @@ import java.util.List;
 import java.util.Random;
 
 public class SaleScreenController {
+    Product product1 = new Product(1, "Product A", "Description A", 15.0f,1.0f, 10, false);
+    Product product2 = new Product(2, "Product B", "Description B", 10.0f, 2.0f, 20, true);
+    Item item1 = new Item(product1, 2);
+    Item item2 = new Item(product2, 3);
+    List<Item> list = Arrays.asList(item1, item2);
 
     @FXML
     private TextField idTextField;
@@ -49,34 +53,29 @@ public class SaleScreenController {
     @FXML
     private TextField valueTextField;
     @FXML
-    private ComboBox<String> paymentComboBox;
+    private ComboBox<Payment> paymentComboBox;
+    private final Cart cart = new Cart(list);
+    private final Date timeStamp = new Date();
     private String log;
 
     @FXML
     public void initialize() {
-        Date timeStamp = new Date();
         Random random = new Random();
         int num = random.nextInt(10000);
         String id = Integer.toString(num);
-        float value;
+
 
         // Populate ComboBoxes with sample data
         List<Employee> employees = Arrays.asList(new Employee("Claudio", Role.clerk), new Employee("Roberto", Role.manager));
         List<Client> clients = Arrays.asList(new Client("Acme Corp"), new Client("Globex Inc"));
 
-        Product product1 = new Product(1, "Product A", "Description A", 15.0f,1.0f, 10, false);
-        Product product2 = new Product(2, "Product B", "Description B", 10.0f, 2.0f, 20, true);
-        Item item1 = new Item(product1, 2);
-        Item item2 = new Item(product2, 3);
-
-        Cart cart = new Cart(Arrays.asList(item1, item2));
         
         idTextField.setText(id);
         timeTextField.setText(timeStamp.toString());
 
         employeeComboBox.getItems().addAll(employees);
         clientComboBox.getItems().addAll(clients);
-        paymentComboBox.getItems().addAll(Arrays.asList("PIX", "Crédito", "Débito"));
+        paymentComboBox.getItems().addAll(Arrays.asList(Payment.values()));
 
         idColumn.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().getProduct().getId()));
         nameColumn.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().getProduct().getName()));
@@ -105,32 +104,23 @@ public class SaleScreenController {
     private void closeSale() {
         Employee employee = employeeComboBox.getSelectionModel().getSelectedItem();
         Client client = clientComboBox.getSelectionModel().getSelectedItem();
-        String payment = paymentComboBox.getSelectionModel().getSelectedItem();
-        String id = idTextField.getText();
+        Payment payment = paymentComboBox.getSelectionModel().getSelectedItem();
+        int id = Integer.parseInt(idTextField.getText());
 
-        if (employee != null && client != null && payment != null) {
-            log = "Sale " + id + " payed with " + payment + " closed on " + new Date() + " by " + employee.getName() + " for client " + client.getName();
-        } else {
-            log = "Sale " + id +  " closed on " + new Date();
-        }
+        Sale sale = new Sale(id, employee, client, timeStamp, cart, payment, "Sale log: ");
 
-        System.out.println(log);
-        // Implement more logic as needed
+        sale.closeSale();
     }
 
     @FXML
     private void cancelSale() {
         Employee employee = employeeComboBox.getSelectionModel().getSelectedItem();
         Client client = clientComboBox.getSelectionModel().getSelectedItem();
-        String id = idTextField.getText();
+        Payment payment = paymentComboBox.getSelectionModel().getSelectedItem();
+        int id = Integer.parseInt(idTextField.getText());
 
-        if (employee != null && client != null) {
-            log = "Sale " + id + " cancelled on " + new Date() + " by " + employee.getName() + " for client " + client.getName();
-        } else {
-            log = "Sale " + id +  " closed on " + new Date();
-        }
+        Sale sale = new Sale(id, employee, client, timeStamp, cart, payment, "Sale log: ");
 
-        System.out.println(log);
-        // Implement more logic as needed
+        sale.cancelSale();
     }
 }
