@@ -6,28 +6,28 @@
 
 <AnchorPane prefHeight="490.0" prefWidth="675.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.unesp.farma.fxControllers.SaleScreenController">
    <children>
-      <Text layoutX="37.0" layoutY="79.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cliente:" wrappingWidth="66.13671875" />
+      <Text layoutX="37.0" layoutY="79.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Client:" wrappingWidth="66.13671875" />
       <Text layoutX="37.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ID:" wrappingWidth="66.13671875" />
-      <Text layoutX="37.0" layoutY="117.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Funcionário:" wrappingWidth="66.13671874999994" />
-      <Text layoutX="37.0" layoutY="156.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Produtos:" wrappingWidth="66.13671875" />
+      <Text layoutX="37.0" layoutY="117.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Employee:" wrappingWidth="66.13671874999994" />
+      <Text layoutX="37.0" layoutY="156.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Products:" wrappingWidth="66.13671875" />
       <TextField fx:id="idTextField" editable="false" layoutX="129.0" layoutY="24.0" prefHeight="26.0" prefWidth="98.0" />
       <ComboBox fx:id="employeeComboBox" layoutX="152.0" layoutY="99.0" prefHeight="25.0" prefWidth="241.0" />
       <ComboBox fx:id="clientComboBox" layoutX="129.0" layoutY="61.0" prefHeight="25.0" prefWidth="265.0" />
-      <Button fx:id="closeSaleBtn" layoutX="587.0" layoutY="442.0" mnemonicParsing="false" onAction="#closeSale" text="Concluir" />
-      <Button layoutX="515.0" layoutY="442.0" mnemonicParsing="false" onAction="#cancelSale" text="Cancelar" />
-      <Button layoutX="29.0" layoutY="442.0" mnemonicParsing="false" text="Voltar" />
-      <TableView fx:id="cartTableView" layoutX="103.0" layoutY="143.0" prefHeight="182.0" prefWidth="515.0">
+      <Button fx:id="closeSaleBtn" layoutX="587.0" layoutY="442.0" mnemonicParsing="false" onAction="#closeSale" text="Finish" />
+      <Button layoutX="515.0" layoutY="442.0" mnemonicParsing="false" onAction="#cancelSale" text="Cancel" />
+      <Button layoutX="29.0" layoutY="442.0" mnemonicParsing="false" onAction="#handleBackButton" text="Return" />
+      <TableView fx:id="cartTableView" layoutX="103.0" layoutY="143.0" prefHeight="182.0" prefWidth="515.0" editable="true">
         <columns>
           <TableColumn fx:id="idColumn" prefWidth="43.0" text="ID" />
-          <TableColumn fx:id="nameColumn" prefWidth="172.0" text="Nome" />
-            <TableColumn fx:id="priceColumn" prefWidth="82.0" text="Valor" />
-            <TableColumn fx:id="quantityColumn" prefWidth="102.0" text="Qtd" />
+          <TableColumn fx:id="nameColumn" prefWidth="172.0" text="Name" />
+            <TableColumn fx:id="priceColumn" prefWidth="82.0" text="Value" />
+            <TableColumn fx:id="quantityColumn" prefWidth="102.0" text="Qt" />
             <TableColumn fx:id="totalColumn" prefWidth="115.0" text="Total" />
         </columns>
       </TableView>
-      <Text layoutX="37.0" layoutY="365.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Valor Total:" wrappingWidth="66.13671875" />
-      <Text layoutX="438.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Horário da compra:" wrappingWidth="107.13671875" />
-      <Text layoutX="37.0" layoutY="406.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Forma de Pagamento:" wrappingWidth="140.13671875" />
+      <Text layoutX="37.0" layoutY="365.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total value:" wrappingWidth="66.13671875" />
+      <Text layoutX="438.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Time:" wrappingWidth="107.13671875" />
+      <Text layoutX="37.0" layoutY="406.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Payment method:" wrappingWidth="140.13671875" />
       <ComboBox fx:id="paymentComboBox" layoutX="178.0" layoutY="389.0" prefHeight="25.0" prefWidth="241.0" />
       <TextField fx:id="timeTextField" layoutX="438.0" layoutY="61.0" prefHeight="25.0" prefWidth="182.0" />
       <TextField fx:id="valueTextField" layoutX="129.0" layoutY="348.0" />

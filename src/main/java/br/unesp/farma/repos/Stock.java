@@ -47,16 +47,15 @@ public class Stock {
         throw new Exception("There is no Item with this Id");
     }
 
-    public void adjustStock(Item itemStock) throws Exception{
+    public void sellItem(Integer id, Integer amount) throws Exception{
         Iterator<Item> iterator = stockList.iterator();
         int i = 0;
 
         while (iterator.hasNext()){
             Item item = iterator.next();
-            if(Objects.equals(item.getProduct().getId(), itemStock.getProduct().getId())){
-                item.setAmount(item.getAmount() - itemStock.getAmount());
-                if(item.getAmount() < 0)
-                    item.setAmount(0);
+            if(Objects.equals(item.getProduct().getId(), id)){
+                item.setAmount(item.getAmount() - amount);
+                if(item.getAmount() < 0) item.setAmount(0);
                 stockList.remove(i);
                 stockList.add(i, item);
                 return;
@@ -67,8 +66,6 @@ public class Stock {
 
         throw new Exception("There is no Item with this Id");
     }
-
-
 
     public void addToStock(Product product){
         stockList.add(new Item(product, 0));

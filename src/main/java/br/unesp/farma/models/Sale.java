@@ -1,10 +1,14 @@
 package br.unesp.farma.models;
 
+import br.unesp.farma.utils.DemonstrationUtils;
+import br.unesp.farma.repos.Stock;
+
 import jakarta.validation.constraints.NotNull;
 
 import java.util.Date;
 
 public class Sale {
+    Stock stock = DemonstrationUtils.loadStockFromJson();
     @NotNull
     private Integer id;
     @NotNull
@@ -81,5 +85,36 @@ public class Sale {
 
     public void setLog(String log) {
         this.log = log;
+    }
+
+    public void closeSale() {
+        String print;
+
+        for(Item item : cart.itemList){
+            if(item.getAmount() > 0){
+                try {
+                    stock.sellItem(item.getProduct().getId(), item.getAmount());
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }
+
+        print = log + "Sale " + this.id + " payed with " + this.payment + " closed on " + new Date() + " by " + this.employee.getName() + " for client " + this.client.getName();
+
+        DemonstrationUtils.saveToJson(stock);
+
+        System.out.println(print + stock.toString());
+    }
+
+    public void cancelSale() {
+
+        if (this.employee != null && this.client != null) {
+            log = log + "Sale " + this.id + " cancelled on " + new Date() + " by " + this.employee.getName() + " for client " + this.client.getName();
+        } else {
+            log = log + "Sale " + this.id +  " cancel on " + new Date();
+        }
+
+        System.out.println(log);
     }
 }

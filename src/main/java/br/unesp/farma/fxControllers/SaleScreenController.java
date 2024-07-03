@@ -4,16 +4,17 @@ import br.unesp.farma.models.*;
 
 import br.unesp.farma.repos.Stock;
 import br.unesp.farma.utils.DemonstrationUtils;
-import javafx.application.Platform;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.fxml.FXML;
+import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.util.converter.IntegerStringConverter;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-import javafx.stage.Window;
 
 import java.util.*;
 
 public class SaleScreenController {
+    Stock stock = DemonstrationUtils.loadStockFromJson();
 
     @FXML
     private TextField idTextField;
@@ -47,42 +48,44 @@ public class SaleScreenController {
     @FXML
     private TextField valueTextField;
     @FXML
-    private ComboBox<String> paymentComboBox;
-
+    private ComboBox<Payment> paymentComboBox;
     @FXML
     private Button closeSaleBtn;
-
+    private final Cart cart = new Cart(stock.getStockList());
+    private final Date timeStamp = new Date();
     private String log;
-    Stock stock;
-    Cart cart;
+
+    @FXML
+    private void handleBackButton() {
+        // Get a reference to the stage
+        Stage stage = (Stage) cartTableView.getScene().getWindow();
+        // Close the stage
+        stage.close();
+    }
 
     @FXML
     public void initialize() {
-        Date timeStamp = new Date();
         Random random = new Random();
         int num = random.nextInt(10000);
         String id = Integer.toString(num);
-        cart = new Cart();
+
 
         // Populate ComboBoxes with sample data
         List<Employee> employees = Arrays.asList(new Employee("Claudio", Role.clerk), new Employee("Roberto", Role.manager));
         List<Client> clients = Arrays.asList(new Client("Acme Corp"), new Client("Globex Inc"));
 
-        Product product1 = new Product(1, "Product A", "Description A", 15.0f,1.0f, 10, false);
-        Product product2 = new Product(2, "Product B", "Description B", 10.0f, 2.0f, 20, true);
-        Item item1 = new Item(product1, 2);
-        Item item2 = new Item(product2, 3);
+        for(Item item : cart.getItemList()){
+            if(item.getAmount() > 0)
+                item.setAmount(0);
+        }
 
-        cart.modItem(item1.getProduct(), item1.getAmount());
-        cart.modItem(item2.getProduct(), item2.getAmount());
         
         idTextField.setText(id);
         timeTextField.setText(timeStamp.toString());
 
         employeeComboBox.getItems().addAll(employees);
         clientComboBox.getItems().addAll(clients);
-        paymentComboBox.getItems().addAll(Arrays.asList("PIX", "Crédito", "Débito"));
-
+        paymentComboBox.getItems().addAll(Arrays.asList(Payment.values()));
         idColumn.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().getProduct().getId()));
         nameColumn.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().getProduct().getName()));
         priceColumn.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().getProduct().getPrice()));
@@ -95,7 +98,13 @@ public class SaleScreenController {
 
 
         cartTableView.getItems().addAll(cart.getItemList());
-        updateTotalValue();
+        quantityColumn.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
+        quantityColumn.setOnEditCommit(event -> {
+            Item item = event.getRowValue();
+            item.setAmount(event.getNewValue());
+            cartTableView.refresh();
+            updateTotalValue();
+        });
     }
 
     private void updateTotalValue() {
@@ -110,51 +119,26 @@ public class SaleScreenController {
     private void closeSale() {
         Employee employee = employeeComboBox.getSelectionModel().getSelectedItem();
         Client client = clientComboBox.getSelectionModel().getSelectedItem();
-        String payment = paymentComboBox.getSelectionModel().getSelectedItem();
-        String id = idTextField.getText();
-        Iterator<Item> iterator = cart.getItemList().iterator();
-        Item item;
+        Payment payment = paymentComboBox.getSelectionModel().getSelectedItem();
+        int id = Integer.parseInt(idTextField.getText());
+        if(employee != null && client != null && payment != null){
+            Sale sale = new Sale(id, employee, client, timeStamp, cart, payment, "Sale log: ");
 
-        if (employee != null && client != null && payment != null) {
-            log = "Sale " + id + " payed with " + payment + " closed on " + new Date() + " by " + employee.getName() + " for client " + client.getName();
-        } else {
-            log = "Sale " + id +  " closed on " + new Date();
+            sale.closeSale();
+            handleBackButton();
         }
-
-        System.out.println(log);
-
-        stock = DemonstrationUtils.loadStockFromJson();
-
-        while (iterator.hasNext()){
-            item = iterator.next();
-            try {
-                stock.adjustStock(item);
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
-
-        }
-        DemonstrationUtils.saveToJson(stock);
-
-        Stage stage = (Stage) closeSaleBtn.getScene().getWindow();
-        stage.close();
-
-        // Implement more logic as needed
     }
 
     @FXML
     private void cancelSale() {
         Employee employee = employeeComboBox.getSelectionModel().getSelectedItem();
         Client client = clientComboBox.getSelectionModel().getSelectedItem();
-        String id = idTextField.getText();
+        Payment payment = paymentComboBox.getSelectionModel().getSelectedItem();
+        int id = Integer.parseInt(idTextField.getText());
 
-        if (employee != null && client != null) {
-            log = "Sale " + id + " cancelled on " + new Date() + " by " + employee.getName() + " for client " + client.getName();
-        } else {
-            log = "Sale " + id +  " closed on " + new Date();
-        }
+        Sale sale = new Sale(id, employee, client, timeStamp, cart, payment, "Sale log: ");
 
-        System.out.println(log);
-        // Implement more logic as needed
+        sale.cancelSale();
+        handleBackButton();
     }
 }
