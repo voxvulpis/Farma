@@ -4,15 +4,12 @@ import br.unesp.farma.models.*;
 
 import br.unesp.farma.repos.Stock;
 import br.unesp.farma.utils.DemonstrationUtils;
-import javafx.application.Platform;
 import javafx.beans.property.ReadOnlyObjectWrapper;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.stage.*;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.util.converter.IntegerStringConverter;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-import javafx.stage.Window;
 
 import java.util.*;
 
