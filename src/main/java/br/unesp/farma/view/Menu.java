@@ -18,7 +18,8 @@ public class Menu extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(Menu.class.getResource("main-screen.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("Farma Menu");
-        stage.setResizable(false);
+        stage.setMaximized(true);
+        stage.setResizable(true);
         stage.setScene(scene);
         stage.show();
     }

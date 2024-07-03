@@ -1,13 +1,16 @@
 package br.unesp.farma.models;
 
-public class Client extends PrivateIndividual{
+public class Client extends PrivateIndividual {
+
+    private String info;
+
     public Client(String name) {
-        this.name = name;
+        super.setName(name);
     }
 
     @Override
     public String toString() {
-        return name;
+        return super.getName();
     }
 
 }

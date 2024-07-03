@@ -1,15 +1,21 @@
 package br.unesp.farma.models;
 
+import jakarta.validation.constraints.NotNull;
+
 import java.util.Date;
 
 public class Sale {
-    int id;
-    Employee employee;
-    Client client;
-    Date timeStamp;
-    Cart cart;
-    Payment payment;
-    String log;
+    @NotNull
+    private Integer id;
+    @NotNull
+    private Employee employee;
+    private Client client;
+    private Date timeStamp;
+    @NotNull
+    private Cart cart;
+    @NotNull
+    private Payment payment;
+    private String log;
 
     public Sale(int id, Employee employee, Client client, Date timeStamp, Cart cart, Payment payment, String log) {
         this.id = id;

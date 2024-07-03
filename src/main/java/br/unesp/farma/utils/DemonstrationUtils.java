@@ -1,6 +1,7 @@
 package br.unesp.farma.utils;
 
 import br.unesp.farma.models.Product;
+import br.unesp.farma.repos.People;
 import br.unesp.farma.repos.Stock;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -64,4 +65,17 @@ public class DemonstrationUtils {
         }
 
     }
+
+    public static void saveToJson(People people){
+
+        try(Writer writer = new FileWriter("Stock.json")) {
+            Gson gson = new GsonBuilder().create();
+            gson.toJson(people, writer);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
+
 }
