@@ -93,7 +93,7 @@ public class Sale {
         for(Item item : cart.itemList){
             if(item.getAmount() > 0){
                 try {
-                    stock.sellItem(item.product.id, item.getAmount());
+                    stock.sellItem(item.getProduct().getId(), item.getAmount());
                 } catch (Exception e) {
                     throw new RuntimeException(e);
                 }
