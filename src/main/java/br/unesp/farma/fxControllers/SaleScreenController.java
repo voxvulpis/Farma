@@ -1,4 +1,4 @@
-package br.unesp.farma;
+package br.unesp.farma.fxControllers;
 
 import br.unesp.farma.models.*;
 

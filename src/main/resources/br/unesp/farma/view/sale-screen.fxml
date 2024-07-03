@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="490.0" prefWidth="675.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.unesp.farma.SaleScreenController">
+<AnchorPane prefHeight="490.0" prefWidth="675.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.unesp.farma.fxControllers.SaleScreenController">
    <children>
       <Text layoutX="37.0" layoutY="79.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cliente:" wrappingWidth="66.13671875" />
       <Text layoutX="37.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ID:" wrappingWidth="66.13671875" />

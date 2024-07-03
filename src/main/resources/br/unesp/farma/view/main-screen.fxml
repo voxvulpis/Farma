@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="150.0" prefWidth="150.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.unesp.farma.fxControllers.MenuController">
+   <top>
+      <MenuBar BorderPane.alignment="CENTER">
+        <menus>
+          <Menu mnemonicParsing="false" text="File">
+            <items>
+                  <MenuItem mnemonicParsing="false" text="New Sale" />
+              <MenuItem fx:id="closeFileMenu" mnemonicParsing="false" onAction="#closeWindow" text="Close" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Edit">
+            <items>
+                  <Menu mnemonicParsing="false" text="Manage">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="People" />
+                      <MenuItem mnemonicParsing="false" text="Products" />
+                    </items>
+                  </Menu>
+                  <MenuItem mnemonicParsing="false" text="Stock" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Help">
+            <items>
+              <MenuItem mnemonicParsing="false" text="About" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+   </top>
+   <center>
+      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+         <children>
+            <Separator prefWidth="200.0" />
+            <Button fx:id="saleBtn" alignment="CENTER" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#openSale" text="Sale" />
+            <Separator prefWidth="200.0" />
+            <Button fx:id="stockBtn" alignment="CENTER" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#openStock" text="Stock" />
+            <Separator prefWidth="200.0" />
+            <Button fx:id="peopleBtn" alignment="CENTER" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#openPeople" text="People Manager" />
+            <Separator prefWidth="200.0" />
+            <Button fx:id="productBtn" alignment="CENTER" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#openProduct" text="Product Manager" />
+            <Separator prefWidth="200.0" />
+         </children>
+      </VBox>
+   </center>
+</BorderPane>
