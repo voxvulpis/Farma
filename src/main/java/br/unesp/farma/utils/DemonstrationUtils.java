@@ -1,5 +1,6 @@
 package br.unesp.farma.utils;
 
+import br.unesp.farma.models.Cart;
 import br.unesp.farma.models.Product;
 import br.unesp.farma.repos.People;
 import br.unesp.farma.repos.Stock;
