@@ -19,12 +19,12 @@ import java.util.Set;
 
 
 public class ValidateStock {
-    private static Validator validator;
+    private static Validator validatorItem;
 
     @BeforeClass
     public static void setUpValidator() {
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
-        validator = factory.getValidator();
+        validatorItem = factory.getValidator();
     }
 
     public static Stock loadStockJson(){
@@ -43,7 +43,7 @@ public class ValidateStock {
         while (iterator.hasNext()){
             Item item = iterator.next();
 
-            constraintViolations = validator.validate(item);
+            constraintViolations = validatorItem.validate(item);
             assertEquals(0, constraintViolations.size());
         }
 
@@ -60,7 +60,7 @@ public class ValidateStock {
         while (iterator.hasNext()){
             Product product = iterator.next().getProduct();
 
-            constraintViolations = validator.validate(product);
+            constraintViolations = validatorItem.validate(product);
             assertEquals(0, constraintViolations.size());
         }
 

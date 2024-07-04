@@ -1,6 +1,7 @@
 package br.unesp.farma.utils;
 
 import br.unesp.farma.models.Cart;
+import br.unesp.farma.models.Item;
 import br.unesp.farma.models.Product;
 import br.unesp.farma.repos.People;
 import br.unesp.farma.repos.Stock;
@@ -10,6 +11,8 @@ import com.google.gson.reflect.TypeToken;
 
 import java.io.*;
 import java.lang.reflect.Type;
+import java.util.Iterator;
+import java.util.Objects;
 
 /*
 *
@@ -57,22 +60,28 @@ public class DemonstrationUtils {
         return stock;
     }
 
+    public static Cart defaultCart(){
+        Stock tempStock = loadStockFromJson();
+        Cart cart = new Cart();
+
+
+
+        Iterator<Item> iterator = tempStock.getStockList().iterator();
+        int i = 0;
+
+        while (iterator.hasNext()){
+            Item item = iterator.next();
+            cart.modItem(item.getProduct(), 2);
+        }
+
+        return cart;
+    }
+
     public static void saveToJson(Stock stock){
 
         try(Writer writer = new FileWriter("Stock.json")) {
             Gson gson = new GsonBuilder().create();
             gson.toJson(stock, writer);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-
-    }
-
-    public static void saveToJson(People people){
-
-        try(Writer writer = new FileWriter("Stock.json")) {
-            Gson gson = new GsonBuilder().create();
-            gson.toJson(people, writer);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

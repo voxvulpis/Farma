@@ -8,7 +8,6 @@ import jakarta.validation.constraints.NotNull;
 import java.util.Date;
 
 public class Sale {
-    Stock stock = DemonstrationUtils.loadStockFromJson();
     @NotNull
     private Integer id;
     @NotNull
@@ -89,6 +88,7 @@ public class Sale {
 
     public void closeSale() {
         String print;
+        Stock stock = DemonstrationUtils.loadStockFromJson();
 
         for(Item item : cart.itemList){
             if(item.getAmount() > 0){
