@@ -51,8 +51,8 @@ public class SaleScreenController {
     private ComboBox<Payment> paymentComboBox;
     @FXML
     private Button closeSaleBtn;
-    private final Cart cart = new Cart(stock.getStockList());
-    private final Date timeStamp = new Date();
+    private Cart cart ;
+    private Date timeStamp;
     private String log;
 
     @FXML
@@ -65,19 +65,21 @@ public class SaleScreenController {
 
     @FXML
     public void initialize() {
+        timeStamp = new Date();
         Random random = new Random();
         int num = random.nextInt(10000);
         String id = Integer.toString(num);
+        cart = DemonstrationUtils.defaultCart();
 
 
         // Populate ComboBoxes with sample data
         List<Employee> employees = Arrays.asList(new Employee("Claudio", Role.clerk), new Employee("Roberto", Role.manager));
         List<Client> clients = Arrays.asList(new Client("Acme Corp"), new Client("Globex Inc"));
 
-        for(Item item : cart.getItemList()){
-            if(item.getAmount() > 0)
-                item.setAmount(0);
-        }
+//        for(Item item : cart.getItemList()){
+//            if(item.getAmount() > 0)
+//                item.setAmount(1);
+//        }
 
         
         idTextField.setText(id);
@@ -121,12 +123,33 @@ public class SaleScreenController {
         Client client = clientComboBox.getSelectionModel().getSelectedItem();
         Payment payment = paymentComboBox.getSelectionModel().getSelectedItem();
         int id = Integer.parseInt(idTextField.getText());
+        Iterator<Item> iterator = cart.getItemList().iterator();
+        Item item;
+
+
         if(employee != null && client != null && payment != null){
             Sale sale = new Sale(id, employee, client, timeStamp, cart, payment, "Sale log: ");
 
-            sale.closeSale();
+//            sale.closeSale();
             handleBackButton();
         }
+
+        while(iterator.hasNext()){
+            item = iterator.next();
+            if(item.getAmount() > 0){
+                try {
+                    stock.sellItem(item.getProduct().getId(), item.getAmount());
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }
+
+            }
+        }
+
+        DemonstrationUtils.saveToJson(stock);
+
+        Stage stage = (Stage) closeSaleBtn.getScene().getWindow();
+        stage.close();
     }
 
     @FXML

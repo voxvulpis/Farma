@@ -47,8 +47,8 @@ package models {
         int id
         String name
         String description
-        float weight
         float price
+        float weight
         int packageAmount
         bool restricted
     }
@@ -56,9 +56,7 @@ package models {
     class Cart{
         List<Item> itemList
 
-        void addProduct()
-        void rmProduct()
-        int totalPrice()
+        void modItem()
     }
 
     class Item{
@@ -66,35 +64,28 @@ package models {
         int amount() 
     }
 
-    package structs{
-        enum Gender{
-            female
-            male
-            non-binary
-            other
-        }
+    enum Gender{
+        female
+        male
+        non-binary
+        other
+    }
 
-        enum Role{
-            clerk
-            manager
-        }
+    enum Role{
+        clerk
+        manager
+    }
 
-        enum Payment{
-            card
-            cash
-            pix
-        }
-
+    enum Payment{
+        card
+        cash
+        pix
     }
 
 }
 
 
 package repos{
-
-    class LogHistory{
-        List<String> history
-    }
 
     class Stock{
         List<ProductRepo> stockedProducts
@@ -115,21 +106,24 @@ package repos{
 }
 
 package utils{
-    class StockUtils{
-        void restock()
-        void sell()
-        void lostProduct()
-    }
-
-    class SaleUtils{
-
-
-        void closeSale()
-        void executePayment()
-        void updateStock()
-        void saveLog()
+    class DemonstrationUtils{
+        void startDemo()
+        Stock loadStockFromJson()
+        Cart defaultCart()
+        saveToJson(Stock stock)
     }
 }
+
+package validation{
+    class ValidateStock{
+        void setUpValidator()
+        Stock loadStockJson()
+        void validateItems()
+        void validateProducts()
+    }
+}
+
+
 
 
 Actor <|-- PrivateIndividual
